@@ -3,14 +3,14 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeor
 @Entity('prices')
 export class Price {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  chain: string;
+  chain!: string;
 
   @Column('decimal', { precision: 18, scale: 8 })
-  price: number;
+  price!: number;
 
   @CreateDateColumn()
-  timestamp: Date;
+  timestamp!: Date;
 }

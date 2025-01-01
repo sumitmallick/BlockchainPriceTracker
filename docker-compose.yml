@@ -2,24 +2,23 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    depends_on:
-      - postgres
+    image: node:14-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run start:dev
     environment:
-      - DATABASE_URL=postgresql://user:password@postgres:5432/blockchain_db
       - MORALIS_API_KEY=${MORALIS_API_KEY}
       - SMTP_HOST=${SMTP_HOST}
       - SMTP_PORT=${SMTP_PORT}
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: npm run start:dev
+      - DATABASE_URL=postgres://user:password@postgres:5432/blockchain_db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:14-alpine

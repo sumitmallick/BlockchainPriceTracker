@@ -35,13 +35,17 @@ export class BlockchainService {
       this.logger.log(`Fetched price for ${chain}: ${response.data.usdPrice}`);
       return response.data.usdPrice;
     } catch (error) {
-      this.logger.error(`Failed to fetch price for ${chain}: ${error.message}`);
-      throw new HttpException(
-        `Failed to fetch price for ${chain}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+        if (error instanceof Error) {
+          this.logger.error(`Failed to fetch price for ${chain}: ${error.message}`);
+        } else {
+          this.logger.error(`Failed to fetch price for ${chain}: ${String(error)}`);
+        }
+        throw new HttpException(
+          `Failed to fetch price for ${chain}`,
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
     }
-  }
 
   async getSwapRate(ethAmount: number) {
     try {
@@ -67,11 +71,15 @@ export class BlockchainService {
       this.logger.log(`Calculated swap rate for ${ethAmount} ETH`);
       return result;
     } catch (error) {
-      this.logger.error(`Failed to calculate swap rate: ${error.message}`);
-      throw new HttpException(
-        'Failed to calculate swap rate',
-        HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+        if (error instanceof Error) {
+          this.logger.error(`Failed to calculate swap rate: ${error.message}`);
+        } else {
+          this.logger.error(`Failed to calculate swap rate: ${String(error)}`);
+        }
+        throw new HttpException(
+          'Failed to calculate swap rate',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
     }
   }
 }

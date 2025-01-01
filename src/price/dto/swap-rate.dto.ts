@@ -9,5 +9,5 @@ export class SwapRateDto {
   })
   @IsNumber()
   @Min(0)
-  ethAmount: number;
+  ethAmount!: number;
 }

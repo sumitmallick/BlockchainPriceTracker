@@ -1,20 +1,9 @@
 export default () => ({
-    port: parseInt(process.env.PORT, 10) || 3000,
-    database: {
-      url: process.env.DATABASE_URL,
-    },
-    moralis: {
-      apiKey: process.env.MORALIS_API_KEY,
-    },
+    port: parseInt(process.env.PORT || '3000', 10),
     smtp: {
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT, 10),
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-    priceTracking: {
-      interval: 5 * 60 * 1000, // 5 minutes in milliseconds
-      chains: ['ETH', 'MATIC'],
-      alertThreshold: 3, // 3% price increase threshold
+      host: process.env.SMTP_HOST || 'localhost',
+      port: parseInt(process.env.SMTP_PORT || '25', 10),
+      user: process.env.SMTP_USER || '',
+      pass: process.env.SMTP_PASS || '',
     },
   });

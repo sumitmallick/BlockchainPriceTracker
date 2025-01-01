@@ -3,17 +3,17 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity('alerts')
 export class Alert {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  chain: string;
+  chain!: string;
 
   @Column('decimal', { precision: 18, scale: 8 })
-  targetPrice: number;
+  targetPrice!: number;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column({ default: false })
-  triggered: boolean;
+  triggered!: boolean;
 }

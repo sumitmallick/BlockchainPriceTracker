@@ -7,19 +7,19 @@ export class CreateAlertDto {
     example: 'ETH'
   })
   @IsString()
-  chain: string;
+  chain!: string;
 
   @ApiProperty({
     description: 'Target price for the alert in USD',
     example: 2000
   })
   @IsNumber()
-  targetPrice: number;
+  targetPrice!: number;
 
   @ApiProperty({
     description: 'Email address to receive the alert',
     example: 'user@example.com'
   })
   @IsEmail()
-  email: string;
+  email!: string;
 }
